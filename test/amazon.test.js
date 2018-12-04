@@ -6,7 +6,6 @@ describe('Amazon', () => {
         it('"Hello. Sign in" text is Correct', () => {
             browser.url("/");
             const helloSignInText = browser.element("//a/span[contains(@class,'nav-line-1')]").getText();
-            console.log(helloSignInText);
             assert.equal(helloSignInText, 'Hello. Sign in');
             browser.element("//*[@id = 'nav-link-accountList']").click();
         })
@@ -25,6 +24,15 @@ describe('Amazon', () => {
             assert.equal(passwordLabel, 'Password');
             browser.waitForExist(".a-button-input", 10000);
             browser.element("//*[@class = 'a-button-input']").click();
-        }) 
+        })  
+        
+        it('Search result exists,', () => {
+            browser.waitForExist("#twotabsearchtextbox", 10000);
+            browser.setValue('//*[@id = "twotabsearchtextbox"]', 'tadwrewd3a34dtf45let');
+            browser.element("//*[@class = 'nav-input']").click(); 
+            let exist = browser.isExisting('#atfResults');
+            console.log('Search result existing status: ' + exist);
+            assert.equal(exist, true);
+        })
     })
 })
